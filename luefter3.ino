@@ -12,7 +12,7 @@
 #include "pwm.h"
 #include "temp.h"
 
-#define VERSION  3.03
+#define VERSION  3.04
 #define HOSTNAME "luefter"
 
 WiFiEventHandler gotIpEventHandler, disconnectedEventHandler, stationConnectedHandler;
