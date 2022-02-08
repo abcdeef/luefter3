@@ -3,10 +3,10 @@
 
 void initHTTPServer() {
   server.serveStatic("/style.css", SPIFFS, "/style.css");
-  server.serveStatic("/system.css", SPIFFS, "/system.css");
+  //server.serveStatic("/system.css", SPIFFS, "/system.css");
   server.serveStatic("/meins.js", SPIFFS, "/meins.js");
   server.serveStatic("/index.js", SPIFFS, "/index.js");
-  server.serveStatic("/system.js", SPIFFS, "/system.js");
+  //server.serveStatic("/system.js", SPIFFS, "/system.js");
   server.serveStatic("/favicon.ico", SPIFFS, "/favicon.ico");
 
   server.serveStatic("/", SPIFFS, "/index.html");
