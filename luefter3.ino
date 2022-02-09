@@ -23,7 +23,7 @@ ESP8266HTTPUpdateServer httpUpdater;
 //PubSubClient mqtt(MQTT_HOST, MQTT_PORT, callback, wifiClient);
 
 
-#define NUMPIXELS 14
+#define NUMPIXELS 13
 #define PIN       12
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 struct T_ARGB {
@@ -68,12 +68,11 @@ void setup() {
 
   pinMode(14, INPUT);
   pixels.begin();
-  pixels.clear();
-
   for (int i = 0; i < NUMPIXELS; i++) {
-    argb[i].n = false;
-    argb[i].color = 0;
+    //argb[i].n = true;
+    argb[i].color = pixels.Color(0, 255, 0);
   }
+  pixels.setBrightness(125);
 }
 
 uint8_t getF1(int t) {
@@ -92,6 +91,7 @@ uint8_t getF2(int t) {
 #define DELAYVAL 100
 unsigned long old_millis = 0;
 bool argb_show = false;
+
 void loop() {
   if (millis() - old_millis > 2000 ) {
     unsigned long pulse = pulseIn(14, LOW);
@@ -104,22 +104,17 @@ void loop() {
 
     pwms[3].setVal(getF2(temp.val));
 
-    pixels.clear();
-    for (int i = 0; i < NUMPIXELS; i++) {
-      if (argb[i].n) {
-        Serial.println(i);
-        pixels.setPixelColor(i, argb[i].color);
-        argb_show = true;
-      }
-    }
-    pixels.show();
-    /*if (argb_show) {
-      pixels.show();
-      argb_show = false;
-      }*/
+
+
+
 
     old_millis = millis();
   }
+  pixels.clear();
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, argb[i].color);
+  }
+  pixels.show();
 
   server.handleClient();
   webSocket.loop();

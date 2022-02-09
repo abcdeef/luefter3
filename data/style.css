@@ -3,7 +3,7 @@ html {
 	display: inline-block;
 	text-align: center;
 }
-#pwms {
+#pwms, #w {
     display: grid;
     grid-template-columns: 80px auto 50px;
 }
@@ -47,4 +47,14 @@ html {
 	background: #04AA6D; /* Green background */
 	cursor: pointer; /* Cursor on hover */
 	border-radius: 20px;  
+}
+div#argb {
+    display: flex;
+}
+#argb input {
+    width: 75px;
+    height: 40px;
+    border: 2px solid grey;
+    margin: 6px;
+    border-radius: 5px;
 }

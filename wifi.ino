@@ -27,6 +27,14 @@ void webSocketProcess( uint8_t * data, size_t len) {
         }
         asd +=  pwms[n].toJSON();
       }
+      asd += "],\"BR\":125,\"ARGBS\":[";
+
+      for (int i = 0; i < NUMPIXELS; i++) {
+        if (i > 0) {
+          asd += ",";
+        }
+        asd += "{\"ID\":" + String(i) + ",\"ENABLED\":" + argb[i].n + ",\"COLOR\":" + argb[i].color + "}";
+      }
       asd += "]}";
 
       webSocket.broadcastTXT(asd);
@@ -40,16 +48,14 @@ void webSocketProcess( uint8_t * data, size_t len) {
       }
       break;
     case 2:
-      /*  */
-      argb[data[1]].n = true;
+      /* set Color einer LED */
+      //argb[data[1]].n = true;
       argb[data[1]].color = pixels.Color(data[2], data[3], data[4]);
       break;
     case 3:
-      /*  */
-      for (int i = 0; i < NUMPIXELS; i++) {
-        argb[i].n = false;
-        argb[i].color = 0;
-      }
+      /* set W */
+      pixels.setBrightness(data[1]);
+      
       break;
   }
 }
